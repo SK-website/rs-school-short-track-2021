@@ -21,8 +21,42 @@
  *  [1, 1, 1]
  * ]
  */
-function minesweeper(/* matrix */) {
-  throw new Error('Not implemented');
+function minesweeper(matrix) {
+  const xLength = matrix[0].length;
+  const yLength = matrix.length;
+
+  const resFinal = [];
+
+  for (let i = 0; i < yLength; i++) {
+    const stringRes = [];
+
+    for (let j = 0; j < xLength; j++) {
+      let res = 0;
+      if (isValidCoord(i - 1, j - 1) && isBomb(i - 1, j - 1)) res++;
+      if (isValidCoord(i - 1, j) && isBomb(i - 1, j)) res++;
+      if (isValidCoord(i - 1, j + 1) && isBomb(i - 1, j + 1)) res++;
+
+      if (isValidCoord(i + 1, j - 1) && isBomb(i + 1, j - 1)) res++;
+      if (isValidCoord(i + 1, j) && isBomb(i + 1, j)) res++;
+      if (isValidCoord(i + 1, j + 1) && isBomb(i + 1, j + 1)) res++;
+
+      if (isValidCoord(i, j - 1) && isBomb(i, j - 1)) res++;
+      if (isValidCoord(i, j + 1) && isBomb(i, j + 1)) res++;
+      stringRes.push(res);
+    }
+
+    resFinal.push(stringRes);
+  }
+
+  function isValidCoord(x, y) {
+    if (x < 0 || x > matrix[0].length - 1) return false;
+    if (y < 0 || y > matrix.length - 1) return false;
+    return true;
+  }
+  function isBomb(x, y) {
+    return matrix[y][x];
+  }
+  return resFinal;
 }
 
 module.exports = minesweeper;
