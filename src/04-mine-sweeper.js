@@ -27,6 +27,15 @@ function minesweeper(matrix) {
 
   const resFinal = [];
 
+  function isValidCoord(x, y) {
+    if (x < 0 || x > matrix[0].length - 1) return false;
+    if (y < 0 || y > matrix.length - 1) return false;
+    return true;
+  }
+  function isBomb(x, y) {
+    return matrix[y][x];
+  }
+
   for (let i = 0; i < yLength; i++) {
     const stringRes = [];
 
@@ -48,14 +57,6 @@ function minesweeper(matrix) {
     resFinal.push(stringRes);
   }
 
-  function isValidCoord(x, y) {
-    if (x < 0 || x > matrix[0].length - 1) return false;
-    if (y < 0 || y > matrix.length - 1) return false;
-    return true;
-  }
-  function isBomb(x, y) {
-    return matrix[y][x];
-  }
   return resFinal;
 }
 
